@@ -47,7 +47,7 @@ def retrieve_tweets(screen_name):
 
 def main():
     tweets = [["Screen Name, Tweet"]]
-    screen_names = ["RoguePOTUSStaff", "altusda", "alt_fda", "ActualEPAFacts", "ungaggedEPA",
+    screen_names = ["altusda", "alt_fda", "ActualEPAFacts", "ungaggedEPA",
                     "Alt_CDC", "AltUSFWS", "AltHHS", "Alt_NIH", "BadHombreNPS", "NotAltWorld",
                     "AltForestServ", "RogueNASA", "Alt_NASA", "altNOAA"]
     for screen_name in screen_names:
@@ -55,7 +55,7 @@ def main():
         tweets.append(retrieve_tweets(screen_name))
     import itertools
     tweets = list(itertools.chain.from_iterable(tweets))
-    thefile = open('test.txt', 'w')
+    thefile = open('intial_pull.csv', 'w')
 
     for item in tweets:
         thefile.write("%s\n" % item)
