@@ -147,14 +147,23 @@ def retrieve_top_n_tweets(top_result_indexes):
         print list_of_raw_tweets[result_index] +'\n'
 
 if __name__=='__main__':
-
+    
     query = raw_input("Please enter your search query: ")
+    if query.lower() == "i'm done":
+        running = False
+    else:
+        running = True
+    while running:
+        QF = create_query_frequency(query)
+        CF, list_of_raw_tweets = create_collection_frequency(tweets_df,'Tweet')
+        DFs = create_document_frequencies(tweets_df,'Tweet')
+        doc_lengths, docLengthAvg, docN = calc_tweet_lengths(tweets_df,'Tweet')
+        debugging_one(DFs,doc_lengths)
 
-    QF = create_query_frequency(query)
-    CF, list_of_raw_tweets = create_collection_frequency(tweets_df,'Tweet')
-    DFs = create_document_frequencies(tweets_df,'Tweet')
-    doc_lengths, docLengthAvg, docN = calc_tweet_lengths(tweets_df,'Tweet')
-    debugging_one(DFs,doc_lengths)
-
-    bm25_scores = implement_bm25(tweets_df, 'Tweet', query, docN, DFs, doc_lengths, docLengthAvg, QF, CF)
-    retrieve_top_n_tweets(bm25_scores)
+        bm25_scores = implement_bm25(tweets_df, 'Tweet', query, docN, DFs, doc_lengths, docLengthAvg, QF, CF)
+        retrieve_top_n_tweets(bm25_scores, tweets_df)
+        query = raw_input("Please enter your search query: ")
+        if query.lower() == "i'm done":
+            running = False
+        else:
+            running = True
