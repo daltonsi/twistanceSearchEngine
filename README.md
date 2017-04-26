@@ -1,3 +1,5 @@
+# TWISTANCE Search Engine
+## Semester Project for Winter 2017 Information Retrieval Course
 
 Alex Czarnik
 czarnika@umich.edu
